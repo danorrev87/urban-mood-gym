@@ -1,62 +1,272 @@
+/* Add a background image and a dark overlay */
+body::before {
+  content: "";
+  background-image: url('/images/background-login.jpg');
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  background-color: black;
+}
+
+/* Login page styles */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  z-index: 1;
+  width: 50%;
+  margin: auto;
+}
+
+label {
+  margin-bottom: 5px;
+  color: #B7C450;
+}
+
+input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #818658;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 3, 0.8);
+  color: white;
+  width: 100%;
+  max-width: 400px;
+}
+
+#login {
+  margin-top: 20px;
+  background-color: #B7C450;
+  color: #05040E;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 200px;
+}
+
+#login:hover {
+  background-color: #818658;
+}
+
+#message {
+  color: red;
+  margin-top: 20px;
+}
+
+/* Main page styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
+  font-family: 'Maven Pro', sans-serif;
+  color: white;
+  background-color: #05040E;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #070517;
+  padding: 20px;
+}
+
+header img {
+  height: 50px;
+}
+
+.logout-container {
+  display: flex;
+  justify-content: center;
+}
+
+#logout {
+  background-color: #B7C450;
+  color: #05040E;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#logout:hover {
+  background-color: #818658;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #000003;
+  padding: 10px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+nav a:hover {
+  background-color: #B7C450;
+  color: #05040E;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.product-card {
+  background-color: white;
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.product-card h3 {
+  margin-top: 0;
+}
+
+.product-card img {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  background-color: #B7C450;
+  color: #05040E;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background-color: #818658;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
   }
-  
-  h1, h2 {
-    color: #333;
+  .product-card {
+    width: 80%;
   }
-  
+}
+
+@media (max-width: 576px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+  header img {
+    margin-bottom: 10px;
+  }
   nav {
-    background-color: #333;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
   }
-  
   nav a {
-    color: #fff;
-    text-decoration: none;
+    margin-bottom: 10px;
   }
-  
-  nav a:hover {
-    color: #ccc;
+}
+
+.image-container {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+#animated-image {
+  max-height: 200px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  width: 100%;
+}
+
+.container label {
+  margin-bottom: 5px;
+  color: #B7C450;
+  width: 100%;
+}
+
+.container input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #818658;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 3, 0.8);
+  color: white;
+  width: 100%;
+  max-width: 400px;
+}
+
+.container button {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #B7C450;
+  color: #05040E;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: #818658;
+}
+
+.container #message {
+  color: red;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 50%;
   }
-  
-  #login-container {
-    width: 300px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #f4f4f4;
-    border: 1px solid #333;
-    border-radius: 4px;
-  }
-  
-  input[type="email"], input[type="password"] {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  button {
-    display: block;
-    width: 100%;
-    padding: 0.5rem;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-  }
-  
-  button:hover {
-    background-color: #444;
-  }
-  
-  #message {
-    margin-top: 1rem;
-    color: red;
-  }
-  
+}

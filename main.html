@@ -7,10 +7,35 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.jpg" alt="Urban Mood logo">
+      <h1>Urban Mood - Gimnasio</h1>
+    </div>
+    <div class="logout-container">
+      <button id="logout">Cerrar sesión</button>
+    </div>
+  </header>
+  <div class="background-image"></div>
   <div class="container">
     <h1>Urban Mood - Página principal</h1>
     <p>¡Gracias por unirte a Urban Mood!</p>
     <p>Disfruta de nuestras instalaciones y clases para mejorar tu estado físico y bienestar.</p>
   </div>
+
+  <!-- Firebase SDK scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-analytics.js"></script>
+
+  <!-- Your Firebase configuration -->
+  <script type="module" src="js/firebase-config.js"></script>
+
+  <!-- Your main script -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- Your logout script -->
+  <script type="module" src="js/logout.js"></script>
 </body>
 </html>
