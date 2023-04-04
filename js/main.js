@@ -1,6 +1,9 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js';
 import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-auth.js';
 import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js';
+import { shuffle } from 'https://cdn.skypack.dev/lodash-es';
+
+import anime from 'https://cdn.skypack.dev/animejs';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBl1hLvPTWg13tMYq0jXnanw_4i5cyPYvY",
@@ -35,58 +38,67 @@ if (logoutBtn) {
   logoutBtn.addEventListener('click', logout);
 }
 
-// Get products from Firestore and display them on the page
-getDocs(collection(db, "products")).then((querySnapshot) => {
-  const productsContainer = document.querySelector(".main-container");
-
-  querySnapshot.forEach((doc) => {
-    const product = doc.data();
-
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-    productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}">
-      <h3>${product.name}</h3>
-      <p>${product.description}</p>
-      <button>Agregar al carrito</button>
-    `;
-
-    const addButton = productCard.querySelector("button");
-    addButton.addEventListener("click", function() {
-      console.log(`Added ${product.name} to cart`);
-    });
-
-    productsContainer.appendChild(productCard);
-  });
-}).catch((error) => {
-  console.error(error);
-});
-
-const images = [
-  "images/image1.jpg",
-  "images/image2.jpg",
-  "images/image3.jpg",
-  // Add more image paths if needed
+// Image Carousel
+const imagePaths = [
+  'carousel-image-1.jpg',
+  'carousel-image-2.jpg',
+  'carousel-image-3.jpg',
+  'carousel-image-4.jpg'
 ];
 
-const animatedImage = document.getElementById("animated-image");
-let currentImageIndex = 0;
+const randomImagePaths = shuffle([...imagePaths]); // Shuffling image paths
 
-function updateImage() {
-  animatedImage.src = images[currentImageIndex];
-  animatedImage.style.opacity = 0;
-  setTimeout(() => {
-    animatedImage.style.opacity = 1;
-  }, 100);
+const imageContainer = document.querySelector('.image-container');
+
+for (let i = 0; i < randomImagePaths.length; i++) {
+  const imagePath = `images/${randomImagePaths[i]}`; // Using shuffled image paths
+  const img = document.createElement('img');
+  img.src = imagePath;
+  img.alt = `Carousel Image ${i + 1}`;
+  imageContainer.appendChild(img);
 }
 
-function nextImage() {
-  currentImageIndex = (currentImageIndex + 1) % images.length;
-  updateImage();
+const images = document.querySelectorAll('.image-container img');
+
+let currentIndex = 0;
+let nextIndex = 1;
+
+function animateCarousel() {
+  const currentImage = images[currentIndex];
+  const nextImage = images[nextIndex];
+  const clone = nextImage.cloneNode();
+
+  clone.style.position = 'absolute';
+  clone.style.top = 0;
+  clone.style.left = 0;
+  clone.style.opacity = 0;
+
+  imageContainer.appendChild(clone);
+
+  anime({
+    targets: [currentImage],
+    opacity: 0,
+    duration: 1000,
+    easing: 'linear',
+    complete: () => {
+      currentImage.style.display = 'none';
+    }
+  });
+
+  anime({
+    targets: [nextImage, clone],
+    opacity: 1,
+    duration: 1000,
+    easing: 'linear',
+    complete: () => {
+      imageContainer.removeChild(clone);
+      currentIndex = nextIndex;
+      nextIndex = (currentIndex + 1) % images.length;
+      setTimeout(animateCarousel, 3000);
+    }
+  });
 }
 
-// Initial image update
-updateImage();
-
-// Change images every 5 seconds
-setInterval(nextImage, 5000);
+if (images.length > 0) {
+  setTimeout(animateCarousel, 3000);
+}
